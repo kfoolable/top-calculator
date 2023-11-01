@@ -16,6 +16,9 @@ let secondInput = "";
 
 let result = "";
 
+let isFirstInput = true;
+let isSecondInput = false;
+
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -33,6 +36,9 @@ function divide(num1, num2) {
 }
 
 function operate(op, first, second) {
+  first = parseFloat(first);
+  second = parseFloat(second);
+
   switch (op) {
     case "+":
       return add(first, second);
@@ -47,26 +53,25 @@ function operate(op, first, second) {
 
 btnNumbers.forEach((button) => {
   button.addEventListener("click", () => {
-    firstInput += button.textContent;
-    display.textContent = firstInput;
-  });
-});
-
-btnOperators.forEach((button) => {
-  button.addEventListener("click", () => {
-    operator = button.textContent;
-  });
-});
-
-btnNumbers.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (operator !== null) {
+    if (isFirstInput) {
+      firstInput += button.textContent;
+      display.textContent = firstInput;
+    } else {
       secondInput += button.textContent;
       display.textContent = secondInput;
     }
   });
 });
 
+btnOperators.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (firstInput !== "") {
+      operator = button.textContent;
+      isFirstInput = false;
+    }
+  });
+});
+
 btnEquals.addEventListener("click", () => {
-  operate(operator, firstInput, secondInput);
+  display.textContent = operate(operator, firstInput, secondInput);
 });
