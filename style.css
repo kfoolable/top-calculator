@@ -52,3 +52,7 @@ button {
 .zero {
   width: 175px;
 }
+
+.active {
+  background-color: #ffd3d5;
+}

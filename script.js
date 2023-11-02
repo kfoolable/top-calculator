@@ -20,6 +20,8 @@ let result = "";
 let isFirstInput = true;
 let isSecondInput = false;
 
+let activeOperator = null;
+
 let myArray = [];
 
 function add(num1, num2) {
@@ -42,6 +44,10 @@ function operate(op, first, second) {
   first = parseFloat(first);
   second = parseFloat(second);
 
+  if (op === "/" && second === 0) {
+    return "Error: Division by zero";
+  }
+
   switch (op) {
     case "+":
       return add(first, second);
@@ -56,10 +62,16 @@ function operate(op, first, second) {
 
 btnNumbers.forEach((button) => {
   button.addEventListener("click", () => {
-    if (operator === null) {
-      firstInput += button.textContent;
-      display.textContent = firstInput;
-    } else {
+    if (isFirstInput) {
+      if (operator === null) {
+        firstInput += button.textContent;
+        display.textContent = firstInput;
+      } else {
+        secondInput += button.textContent;
+        display.textContent = secondInput;
+        isSecondInput = true;
+      }
+    } else if (isSecondInput) {
       secondInput += button.textContent;
       display.textContent = secondInput;
     }
@@ -78,8 +90,15 @@ btnOperators.forEach((button) => {
         //console.log(calculated);
         display.textContent = calculated;
       }
+
+      btnOperators.forEach((opBtn) => {
+        opBtn.classList.remove("active");
+      });
+
       operator = button.textContent;
       //display.textContent = secondInput;
+
+      button.classList.add("active");
     }
   });
 });
@@ -98,16 +117,61 @@ btnDot.addEventListener("click", () => {
   }
 });
 
+// btnEquals.addEventListener("click", () => {
+//   if (firstInput !== "" && operator !== null && secondInput !== "") {
+//     const calculated = operate(operator, firstInput, secondInput);
+//     myArray.push(calculated);
+//     result = calculated;
+//     display.textContent = result;
+//     firstInput = String(result);
+//     secondInput = "";
+//     operator = null;
+
+//     btnOperators.forEach((opBtn) => {
+//       opBtn.classList.remove("active");
+//     });
+//   }
+// });
+
 btnEquals.addEventListener("click", () => {
   if (firstInput !== "" && operator !== null && secondInput !== "") {
     const calculated = operate(operator, firstInput, secondInput);
-    myArray.push(calculated);
-    result = calculated;
-    display.textContent = result;
-    firstInput = String(result);
-    secondInput = "";
-    operator = null;
+    if (calculated === "Error: Division by zero") {
+      // Display division by zero error message in the display
+      display.textContent = "EERRERERR";
+    } else {
+      myArray.push(calculated);
+      result = calculated;
+      display.textContent = result;
+      firstInput = String(result);
+      secondInput = "";
+      operator = null;
+      btnOperators.forEach((opBtn) => {
+        opBtn.classList.remove("active");
+      });
+    }
   }
+});
+
+btnDel.addEventListener("click", () => {
+  if (isSecondInput && secondInput.length > 0) {
+    secondInput = secondInput.slice(0, -1);
+    display.textContent = secondInput;
+  } else if (!isSecondInput && firstInput.length > 0) {
+    firstInput = firstInput.slice(0, -1);
+    display.textContent = firstInput;
+  }
+});
+
+btnClear.addEventListener("click", () => {
+  // Clear both inputs and update the display
+  firstInput = "";
+  secondInput = "";
+  display.textContent = "";
+
+  btnOperators.forEach((opBtn) => {
+    opBtn.classList.remove("active");
+  });
 });
 
 // btnNumbers.forEach((button) => {
