@@ -151,10 +151,13 @@ btnDel.addEventListener("click", () => {
   } else if (!isSecondInput && firstInput.length > 0) {
     firstInput = firstInput.slice(0, -1);
     display.textContent = firstInput;
+  } else {
+    //clears everything when result is shown (equals was pressed)
+    clearAll();
   }
 });
 
-btnClear.addEventListener("click", () => {
+function clearAll() {
   // Clear both inputs and update the display
   firstInput = "";
   operator = null;
@@ -168,6 +171,10 @@ btnClear.addEventListener("click", () => {
   btnOperators.forEach((opBtn) => {
     opBtn.classList.remove("active");
   });
+}
+
+btnClear.addEventListener("click", () => {
+  clearAll();
 });
 
 // btnEquals.addEventListener("click", () => {
