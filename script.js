@@ -166,7 +166,12 @@ btnDel.addEventListener("click", () => {
 btnClear.addEventListener("click", () => {
   // Clear both inputs and update the display
   firstInput = "";
+  operator = null;
   secondInput = "";
+  result = "";
+  isFirstInput = true;
+  isSecondInput = false;
+  myArray = [];
   display.textContent = "";
 
   btnOperators.forEach((opBtn) => {
