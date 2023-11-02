@@ -99,39 +99,30 @@ btnOperators.forEach((button) => {
       //display.textContent = secondInput;
 
       button.classList.add("active");
+
+      isSecondInput = true;
+      console.log(isSecondInput);
     }
   });
 });
 
 btnDot.addEventListener("click", () => {
-  if (isFirstInput) {
-    if (!firstInput.includes(".")) {
-      firstInput += ".";
-      display.textContent = firstInput;
-    }
-  } else if (isSecondInput) {
-    if (!secondInput.includes(".")) {
-      secondInput += ".";
-      display.textContent = secondInput;
-    }
+  if (
+    isFirstInput &&
+    !firstInput.includes(".") &&
+    !firstInput.includes("Error:")
+  ) {
+    firstInput += ".";
+    display.textContent = firstInput;
+  } else if (
+    isSecondInput &&
+    !secondInput.includes(".") &&
+    !secondInput.includes("Error:")
+  ) {
+    secondInput += ".";
+    display.textContent = secondInput;
   }
 });
-
-// btnEquals.addEventListener("click", () => {
-//   if (firstInput !== "" && operator !== null && secondInput !== "") {
-//     const calculated = operate(operator, firstInput, secondInput);
-//     myArray.push(calculated);
-//     result = calculated;
-//     display.textContent = result;
-//     firstInput = String(result);
-//     secondInput = "";
-//     operator = null;
-
-//     btnOperators.forEach((opBtn) => {
-//       opBtn.classList.remove("active");
-//     });
-//   }
-// });
 
 btnEquals.addEventListener("click", () => {
   if (firstInput !== "" && operator !== null && secondInput !== "") {
@@ -141,7 +132,7 @@ btnEquals.addEventListener("click", () => {
       display.textContent = "EERRERERR";
     } else {
       myArray.push(calculated);
-      result = calculated;
+      result = calculated.toFixed(2);
       display.textContent = result;
       firstInput = String(result);
       secondInput = "";
@@ -178,6 +169,22 @@ btnClear.addEventListener("click", () => {
     opBtn.classList.remove("active");
   });
 });
+
+// btnEquals.addEventListener("click", () => {
+//   if (firstInput !== "" && operator !== null && secondInput !== "") {
+//     const calculated = operate(operator, firstInput, secondInput);
+//     myArray.push(calculated);
+//     result = calculated;
+//     display.textContent = result;
+//     firstInput = String(result);
+//     secondInput = "";
+//     operator = null;
+
+//     btnOperators.forEach((opBtn) => {
+//       opBtn.classList.remove("active");
+//     });
+//   }
+// });
 
 // btnNumbers.forEach((button) => {
 //   button.addEventListener("click", () => {
