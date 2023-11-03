@@ -25,6 +25,7 @@ body {
 .display {
   background-color: white;
   border-radius: 10px;
+  border: 2px solid black;
   height: 100px;
   margin-bottom: 15px;
   font-size: 60px;
@@ -39,6 +40,8 @@ button {
   width: 85px;
   margin-bottom: 5px;
   background-color: mintcream;
+  border-radius: 30px;
+  border: 2px solid black;
   font-size: 30px;
   color: black;
 }
@@ -55,6 +58,6 @@ button {
   width: 175px;
 }
 
-.active {
+button:hover {
   background-color: #ffd3d5;
 }
