@@ -101,7 +101,7 @@ btnOperators.forEach((button) => {
       button.classList.add("active");
 
       isSecondInput = true;
-      console.log(isSecondInput);
+      //console.log(isSecondInput);
     }
   });
 });
