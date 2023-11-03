@@ -56,6 +56,11 @@ let operationStorage = "";
 
 let isResetScreen = false;
 
+btnEquals.addEventListener("click", handleEvaluate);
+btnDot.addEventListener("click", displayDot);
+btnDel.addEventListener("click", handleDelete);
+btnClear.addEventListener("click", handleClear);
+
 btnNumbers.forEach((button) => {
   button.addEventListener("click", () => {
     displayNumbers(button.textContent);
@@ -67,10 +72,6 @@ btnOperators.forEach((button) => {
     handleOperation(button.textContent);
   });
 });
-
-btnEquals.addEventListener("click", handleEvaluate);
-
-btnDot.addEventListener("click", displayDot);
 
 function displayNumbers(number) {
   if (display.textContent === "0" || isResetScreen) resetScreen();
@@ -94,7 +95,7 @@ function handleOperation(operator) {
   currentOperation = operator;
 
   operationStorage = `${firstOperand} ${currentOperation}`;
-  console.log(operationStorage);
+  //console.log(operationStorage);
 
   isResetScreen = true;
 }
@@ -107,9 +108,20 @@ function handleEvaluate() {
   );
 
   currentOperation = null;
-  console.log("second operand " + secondOperand);
+  //console.log("second operand " + secondOperand);
 }
 
 function roundResult(number) {
   return Math.round(number * 1000) / 1000;
+}
+
+function handleDelete() {
+  display.textContent = display.textContent.toString().slice(0, -1);
+}
+
+function handleClear() {
+  display.textContent = "";
+  firstOperand = "";
+  secondOperand = "";
+  currentOperation = null;
 }
