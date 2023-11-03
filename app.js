@@ -102,6 +102,11 @@ function handleOperation(operator) {
 
 function handleEvaluate() {
   if (currentOperation === null || isResetScreen) return;
+  if (currentOperation === "/" && display.textContent === "0") {
+    display.textContent = "ERR";
+    return;
+  }
+
   secondOperand = display.textContent;
   display.textContent = roundResult(
     operate(currentOperation, firstOperand, secondOperand)
