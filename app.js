@@ -55,6 +55,7 @@ let currentOperation = null;
 let operationStorage = "";
 
 let isResetScreen = false;
+let isCurrentScreen = true;
 
 btnEquals.addEventListener("click", handleEvaluate);
 btnDot.addEventListener("click", displayDot);
@@ -83,12 +84,6 @@ function resetScreen() {
   isResetScreen = false;
 }
 
-function displayDot() {
-  if (display.textContent === "") display.textContent = "0";
-  if (display.textContent.includes(".")) return;
-  display.textContent += ".";
-}
-
 function handleOperation(operator) {
   if (currentOperation !== null) handleEvaluate();
   firstOperand = display.textContent;
@@ -98,6 +93,14 @@ function handleOperation(operator) {
   //console.log(operationStorage);
 
   isResetScreen = true;
+  //resetScreen();
+}
+
+function displayDot() {
+  if (isResetScreen) resetScreen();
+  if (display.textContent === "") display.textContent = "0";
+  if (display.textContent.includes(".")) return;
+  display.textContent += ".";
 }
 
 function handleEvaluate() {
